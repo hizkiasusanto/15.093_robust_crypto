@@ -9,4 +9,4 @@ start_date = "2022-07-01" # investment start date (previous dates will be for tr
 starting_cash = 1
 
 # List of portfolio classes except base. Do not change
-port_classes = {x: globals()[x] for x in portfolios.__all__ if x != 'BasePortfolio'}
+port_classes = {x: globals()[x][1] for x in portfolios.__all__ if x != 'BasePortfolio'}

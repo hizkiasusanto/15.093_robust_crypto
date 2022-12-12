@@ -1,5 +1,9 @@
 from utils import *
 from Config import *
+from Evaluator import Evaluator
+
+PLOT_FILENAME = "portfolio_value_plot.png"
+TABLE_FILENAME = "metrics.csv"
 
 if __name__ == "__main__":
     df = generate_data_df(coins)
@@ -10,4 +14,14 @@ if __name__ == "__main__":
         portfolio_instances[port_name] = portfolio(coins, df, start_date, rebalance_period)
         portfolio_instances[port_name].backtest(starting_cash=starting_cash)
 
-    
+    evaluator = Evaluator(portfolio_instances)
+
+    fig = evaluator.plot()
+
+    fig.savefig(PLOT_FILENAME)
+    print(f"Plot figure saved as {PLOT_FILENAME}")
+
+    metrics_df = evaluator.metrics_table()
+
+    metrics_df.to_csv(TABLE_FILENAME)
+    print(f"Metrics saved as {TABLE_FILENAME}")
