@@ -2,6 +2,9 @@ import portfolios
 from portfolios import *
 
 DATA_FOLDER = "data"
+RESULTS_FOLDER = "results"
+PLOT_FILENAME = "portfolio_value_plot.png"
+TABLE_FILENAME = "metrics.csv"
 
 coins = ['BTC', 'MATIC', 'BNB', 'ETH', 'DOGE', 'ADA', 'XRP'] # coins in investment universe
 rebalance_period = 'M' # 'M' for monthly, 'W' for weekly
