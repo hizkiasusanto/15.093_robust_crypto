@@ -18,7 +18,7 @@ class EqualWeightedPortfolio(BasePortfolio):
         while to_add < self.prices.index[-1]:
             ts_index.append(to_add)
 
-            to_add = to_add + relativedelta(months=1)
+            to_add = to_add + increment
             
         return pd.DataFrame(data = 1/len(self.coins), 
                                     index=ts_index, 
