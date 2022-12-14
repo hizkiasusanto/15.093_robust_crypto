@@ -9,7 +9,7 @@ class Evaluator:
         fig, ax = plt.subplots(1, figsize=(20,8))
 
         ax.set_xlabel('Date')
-        ax.set_ylabel('Portfolio value')
+        ax.set_ylabel('Portfolio value (USD)')
 
         for name, obj in self.portfolio_objs.items():
             ax.plot(obj.portfolio_usd_value.index, obj.portfolio_usd_value.sum(axis=1), label=name)
