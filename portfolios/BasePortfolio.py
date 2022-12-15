@@ -61,13 +61,17 @@ class BasePortfolio:
         
         ann_mean = returns.mean() * 24 * 365
         ann_std_dev = returns.std() * np.sqrt(24 * 365)
+        downside_std = returns[returns < 0].std() * np.sqrt(24 * 365)
+
         sharpe_ratio = ann_mean / ann_std_dev
+        sortino_ratio = ann_mean / downside_std
         max_drawdown = (total_portfolio/total_portfolio.cummax() - 1.0).min()
         diversification_metric = (self.portfolio_usd_value.std(axis=1) / total_portfolio).mean()
         
         return {"Annualized mean": ann_mean,
                 "Annualized std. dev.": ann_std_dev,
                 "Sharpe ratio": sharpe_ratio,
+                "Sortino ratio": sortino_ratio,
                 "Max drawdown": max_drawdown,
                 "Diversification metric": diversification_metric
                }

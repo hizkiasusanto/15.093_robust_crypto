@@ -75,10 +75,6 @@ class RobustOptimizationPortfolio_1000(BasePortfolio):
             
             to_add = to_add + increment
         
-        
-        print(pd.DataFrame(data = weights, 
-                                    index=ts_index, 
-                                    columns = [f"{coin}USDT" for coin in self.coins]))
         return pd.DataFrame(data = weights, 
                                     index=ts_index, 
                                     columns = [f"{coin}USDT" for coin in self.coins])

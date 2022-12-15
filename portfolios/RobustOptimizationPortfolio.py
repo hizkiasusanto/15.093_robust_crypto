@@ -64,8 +64,6 @@ class RobustOptimizationPortfolio(BasePortfolio):
             
             current_returns = returns[:to_add][:-1]
             
-            print(len(current_returns))
-            
             expected_returns = np.array(current_returns.mean())
             covariance = np.array(current_returns.cov())
 
@@ -76,9 +74,6 @@ class RobustOptimizationPortfolio(BasePortfolio):
             weights.append(current_weights)
             
             to_add = to_add + increment
-        print(pd.DataFrame(data = weights, 
-                                    index=ts_index, 
-                                    columns = [f"{coin}USDT" for coin in self.coins]))
         
         return pd.DataFrame(data = weights, 
                                     index=ts_index, 
