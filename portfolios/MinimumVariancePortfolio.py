@@ -29,7 +29,8 @@ class MinimumVariancePortfolio(BasePortfolio):
     def calculate_weights(self, rebalance_period, start_date):
         assert rebalance_period in ['M', 'W']
         
-        returns = self.prices.pct_change().dropna()
+        # returns = self.prices.pct_change().dropna()
+        returns = (self.prices/self.prices.shift(1)).dropna()
         
         increment = relativedelta(months=1) if rebalance_period == 'M' else relativedelta(weeks=1)
         

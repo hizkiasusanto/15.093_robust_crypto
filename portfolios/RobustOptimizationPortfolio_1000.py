@@ -5,7 +5,7 @@ import numpy as np
 import cvxpy as cp
 from itertools import combinations
 
-class RobustOptimizationPortfolio(BasePortfolio):
+class RobustOptimizationPortfolio_1000(BasePortfolio):
     def __init__(self, coins, prices, start_date, rebalance_period = 'M'):
         super().__init__(coins, prices, start_date, rebalance_period)
 
@@ -26,7 +26,7 @@ class RobustOptimizationPortfolio(BasePortfolio):
 
         return A
         
-    def optimize(self, r, sigma, A, delta=0.1):
+    def optimize(self, r, sigma, A, delta=1000):
         n = len(self.coins)
 
         w = cp.Variable((n, 1))
@@ -64,8 +64,6 @@ class RobustOptimizationPortfolio(BasePortfolio):
             
             current_returns = returns[:to_add][:-1]
             
-            print(len(current_returns))
-            
             expected_returns = np.array(current_returns.mean())
             covariance = np.array(current_returns.cov())
 
@@ -76,10 +74,11 @@ class RobustOptimizationPortfolio(BasePortfolio):
             weights.append(current_weights)
             
             to_add = to_add + increment
+        
+        
         print(pd.DataFrame(data = weights, 
                                     index=ts_index, 
                                     columns = [f"{coin}USDT" for coin in self.coins]))
-        
         return pd.DataFrame(data = weights, 
                                     index=ts_index, 
                                     columns = [f"{coin}USDT" for coin in self.coins])
